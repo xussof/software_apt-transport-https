@@ -1,0 +1,22 @@
+---
+- name: Installing apt-transport-https packages using apt
+  become: true
+  apt:
+    pkg: "apt-transport-https"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Installing apt-transport-https packages using yum
+  become: true
+  yum:
+    pkg: "apt-transport-https"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Installing apt-transport-https packages using pacman
+  pacman:
+    name: "apt-transport-https"
+    state: present
+  when: ansible_distribution == 'MacOSX'
